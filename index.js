@@ -1,19 +1,14 @@
 // calculate function
 let calculate = function (n1, operator, n2) {
-  if (operator === "add") {
-    return parseFloat(n1) + parseFloat(n2); // + in the beginning is for str=>num conversion,because of concat in strings
-  }
-  if (operator === "subtract") {
-    return parseFloat(n1) - parseFloat(n2);
-  }
-  if (operator === "divide") {
-    return parseFloat(n1) / parseFloat(n2);
-  }
-  if (operator === "multiply") {
-    return parseFloat(n1) * parseFloat(n2);
-  }
+  const firstNum = parseFloat(n1);
+  const secondNum = parseFloat(n2);
+  if (operator === "add") return firstNum + secondNum;
+  if (operator === "subtract") return firstNum - secondNum;
+  if (operator === "multiply") return firstNum * secondNum;
+  if (operator === "divide" && secondNum != 0) return firstNum / secondNum;
+  if (operator === "divide" && secondNum === 0) return "Cannot divide by zero";
 };
-//
+//--------------------------------------------------------------//
 const calculator = document.querySelector(".calculator");
 const keys = calculator.querySelector(".keys");
 const display = document.querySelector(".display");
@@ -113,6 +108,7 @@ keys.addEventListener("click", (e) => {
       let secondValue = displayedNum;
       //
       if (firstValue) {
+        //
         if (previousKeyType === "calculate") {
           firstValue = displayedNum; // case when 5-1=4,then hit '=' again => 3
           secondValue = calculator.dataset.modValue; // trigger to use modVal. Hitting '=' more than once
